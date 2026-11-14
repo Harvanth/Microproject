@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuizHub Pro – Online Quiz Application</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bot.css">
+</head>
+<body>
+<main>
+<header>
+  <div><h1>QuizHub Pro</h1><p class="sub">Timed quizzes, lifelines, streaks and your own questions.</p></div>
+  <div style="display:flex;gap:8px"><button class="btn ghost sm" id="snd">Sound: on</button><button class="btn ghost sm" id="logout">Log out</button><button class="btn ghost sm" id="theme" aria-label="Toggle dark mode">Dark mode</button></div>
+</header>
+<nav id="tabs">
+  <button data-v="play" class="on">Play</button><button data-v="add">Add questions</button><button data-v="board">Leaderboard</button>
+</nav>
+
+<div id="v-play">
+  <section id="start" class="card">
+    <p class="sub" id="mini"></p>
+    <div id="ach"></div>
+    <label for="name">Your name</label><input id="name" maxlength="20" placeholder="e.g. Priya">
+    <label>Choose a topic</label><div class="tcards" id="tc"></div><select id="topic" hidden></select>
+    <div class="row">
+      <div><label for="lvl">Difficulty</label>
+        <select id="lvl"><option value="Easy">Easy (30s, x1)</option><option value="Medium" selected>Medium (20s, x1.5)</option><option value="Hard">Hard (10s, x2)</option></select></div>
+      <div><label for="count">Questions</label><select id="count"><option>5</option><option>8</option><option>10</option><option>All</option></select></div>
+    </div>
+    <button class="btn" id="startBtn">Start quiz</button>
+  </section>
+
+  <section id="quiz" class="card hidden" aria-live="polite">
+    <div class="top"><span id="qnum"></span><span class="pill" id="pts"></span><span class="pill" id="stk"></span><span class="timer" id="timer"></span></div>
+    <div class="tbar"><i id="tb"></i></div><div class="bar"><i id="prog"></i></div>
+    <h2 id="qtext"></h2><div id="opts"></div>
+    <div class="life"><button class="btn ghost sm" id="f5">50/50</button><button class="btn ghost sm" id="skip">Skip</button></div>
+    <div class="fb" id="fb"></div>
+    <button class="btn" id="nextBtn" disabled>Next question</button>
+    <p class="sub" style="margin:10px 0 0;font-size:.85rem">Keys: 1–4 to answer, Enter for next.</p>
+  </section>
+
+  <section id="result" class="card hidden">
+    <p class="sub" id="who"></p><div class="badge" id="badge"></div><div class="score" id="score"></div>
+    <div class="stats" id="stats"></div><p class="sub" id="msg"></p>
+    <button class="btn" id="again">Play again</button><button class="btn ghost" id="retry">Retry missed</button>
+    <button class="btn ghost" id="toggleRev">Review answers</button><button class="btn ghost" id="copy">Copy result</button><button class="btn ghost" id="cert">Certificate</button>
+    <div id="review" class="hidden"></div>
+  </section>
+</div>
+
+<section id="v-add" class="card hidden">
+  <h2>Add your own question</h2>
+  <label for="ctopic">Topic</label><input id="ctopic" list="topics" maxlength="30" placeholder="Existing or new topic"><datalist id="topics"></datalist>
+  <label for="cq">Question</label><textarea id="cq" rows="2"></textarea>
+  <div class="row"><div><label for="o0">Option 1</label><input id="o0"></div><div><label for="o1">Option 2</label><input id="o1"></div>
+  <div><label for="o2">Option 3</label><input id="o2"></div><div><label for="o3">Option 4</label><input id="o3"></div></div>
+  <label for="ca">Correct option</label><select id="ca"><option value="0">Option 1</option><option value="1">Option 2</option><option value="2">Option 3</option><option value="3">Option 4</option></select>
+  <button class="btn" id="addQ">Add question</button><span class="fb" id="addfb"></span>
+  <h2 style="margin-top:22px">Your questions</h2><div id="clist"></div>
+</section>
+
+<section id="v-board" class="card hidden">
+  <h2>Leaderboard</h2>
+  <label for="bf">Filter by topic</label><select id="bf"></select>
+  <table><thead><tr><th>#</th><th>Name</th><th>Topic</th><th>Level</th><th>Points</th></tr></thead><tbody id="board"></tbody></table>
+  <button class="btn ghost" id="csv">Export CSV</button><button class="btn ghost" id="clear">Clear scores</button>
+</section>
+<div class="toast" id="toast"></div>
+</main>
+<script src="script.js"></script>
+<script src="bot.js"></script>
+</body>
+</html>
